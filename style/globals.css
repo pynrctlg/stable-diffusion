@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-primary {
+    @apply text-white px-[30px] py-[8px] rounded-3xl bg-primary cursor-pointer hover:opacity-70 transition-all;
+}
+.btn-danger {
+    @apply bg-danger text-white text-xs rounded py-1.5 px-3 hover:bg-white hover:text-secondary transition-all;
+}
+.btn-green {
+    @apply bg-green-500 text-white text-xs rounded py-1.5 px-3 hover:bg-white hover:text-secondary transition-all;
+}
