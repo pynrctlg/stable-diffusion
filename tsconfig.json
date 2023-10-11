@@ -32,8 +32,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "app/api/deneme/page.js"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"
