@@ -1,6 +1,6 @@
 import { StableDiffusionAPI } from "@/services/api";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   const sdApi = new StableDiffusionAPI();
   const response = await sdApi.apiV3Text2imgPost({
     key: "Ddoxn9JT0nOj6FQshX3LJosr8WrSbc01RepSubAp3Eu0JwP0aw72pX0jdqIP",
@@ -20,5 +20,7 @@ export default async function handler(req, res) {
     track_id: null,
   });
 
-  res.status(200).json(response);
+  return Response.json(response);
 }
+
+export { handler as GET, handler as POST };
