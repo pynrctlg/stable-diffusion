@@ -77,7 +77,7 @@ export default function Register() {
                         Register
                         </button>
                         <div className="text-right text-sm">
-                            Already have an account? <Link className="mt-3 inline-block underline" href="/auth/login">Sign in</Link>
+                            Already have an account? <Link className="mt-3 inline-block underline" href="/login">Sign in</Link>
                         </div>
                     </div>
                 </form>

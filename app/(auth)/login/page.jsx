@@ -59,8 +59,8 @@ export default function Login() {
                             Login
                         </button>
                         <div className="flex justify-between mt-3 text-sm">
-                            <Link className="inline-block underline" href="/auth/forgotPassword">Forgot password?</Link>
-                            <Link className="inline-block underline" href="/auth/register">Create account</Link>
+                            <Link className="inline-block underline" href="/forgotPassword">Forgot password?</Link>
+                            <Link className="inline-block underline" href="/register">Create account</Link>
                         </div>
                     </div>
                 </form>
