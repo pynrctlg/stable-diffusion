@@ -1,6 +1,6 @@
 "use client";
-import Input from "@/componenets/form/input";
-import Title from "@/componenets/ui/Title";
+import Input from "@/components/form/input";
+import Title from "@/components/ui/Title";
 import { loginSchema } from "@/schema/login";
 import { useFormik } from "formik";
 export default function Home() {
@@ -41,8 +41,8 @@ export default function Home() {
     },
   ];
   return (
-    <div className="w-full h-screen bg-secondary place-content-center flex">
-      <div className="w-96 py-10 bg-white">
+    <div className="w-full h-screen bg-secondary place-items-center place-content-center flex">
+      <div className="w-96 py-10 bg-white p-8 rounded-md">
         <Title addClass="text-5xl text-center text-gray-600 mb-5">Login</Title>
         <form className="flex flex-col gap-6 w-full" onSubmit={handleSubmit}>
           {inputs.map((input) => (
