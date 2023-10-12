@@ -1,9 +1,9 @@
-import { StableDiffusionAPI } from "../../../services/api";
+import { StableDiffusionAPI } from "@/services/api";
 
 const handler = async (req) => {
   const sdApi = new StableDiffusionAPI();
   const response = await sdApi.apiV3Text2imgPost({
-    key: "Ddoxn9JT0nOj6FQshX3LJosr8WrSbc01RepSubAp3Eu0JwP0aw72pX0jdqIP",
+    key: process.env.SD_APIKEY,
     prompt:
       "ultra realistic close up portrait ((beautiful pale cyberpunk female with heavy black eyeliner)), blue eyes, shaved side haircut, hyper detail, cinematic lighting, magic neon, dark red city, Canon EOS R3, nikon, f/1.4, ISO 200, 1/160s, 8K, RAW, unedited, symmetrical balance, in-frame, 8K",
     negative_prompt:
@@ -19,11 +19,15 @@ const handler = async (req) => {
     webhook: null,
     track_id: null,
   });
+
+
+
   return Response.json(response.data, {
     headers: response.headers,
     status: response.status,
     statusText: response.statusText
   });
+
 }
 
 export { handler as GET, handler as POST };
