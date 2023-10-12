@@ -1,21 +1,45 @@
 "use client";
 import Input from "@/components/form/input";
 import Title from "@/components/ui/Title";
-import { registerSchema } from "@/schema/login";
+import { registerSchema } from "@/schema/register";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useFormik } from "formik";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 export default function Register() {
+    const [error, setError] = useState('');
+    const router = useRouter();
+
     const onSubmit = async (values, actions) => {
         alert(JSON.stringify(values, null, 2));
-        await new Promise((resolve) => setTimeout(resolve, 4000));
+        setError('');
+        const supabase = createClientComponentClient();
+        const { error } = await supabase.auth.signUp({
+            email:values.email,
+            password: values.password,
+            options: {
+                emailRedirectTo: `${location.origin}/api/auth/callback`
+            }
+        })
 
+        if (error) {
+            setError(error.message)
+        }
+
+        if (!error) {
+            router.push('/verify');
+        }
+        // await new Promise((resolve) => setTimeout(resolve, 4000));
         actions.resetForm();
+
     };
     const { values, handleSubmit, touched, handleChange, errors, handleBlur } =
         useFormik({
             initialValues: {
                 email: "",
                 password: "",
+                confirmPassword: "",
             },
             onSubmit,
             validationSchema: registerSchema,
@@ -24,15 +48,6 @@ export default function Register() {
     const inputs = [
         {
             id: 1,
-            name: "fullName",
-            type: 'text',
-            placeholder: 'Your Full Name',
-            value: values.fullName,
-            errorMessage: errors.fullName,
-            touched: touched.fullName
-        },
-        {
-            id: 2,
             name: 'email',
             type: 'email',
             placeholder: 'Your Email Adress',
@@ -41,7 +56,7 @@ export default function Register() {
             touched: touched.email
         },
         {
-            id: 3,
+            id: 2,
             name: 'password',
             type: 'password',
             placeholder: 'Your Password',
@@ -50,7 +65,7 @@ export default function Register() {
             touched: touched.password
         },
         {
-            id: 4,
+            id: 3,
             name: 'confirmPassword',
             type: 'password',
             placeholder: 'Confirm Your Password',
@@ -74,7 +89,7 @@ export default function Register() {
                     ))}
                     <div className="flex flex-col">
                         <button type="submit" className="btn-primary">
-                        Register
+                            Register
                         </button>
                         <div className="text-right text-sm">
                             Already have an account? <Link className="mt-3 inline-block underline" href="/login">Sign in</Link>
@@ -82,6 +97,14 @@ export default function Register() {
                     </div>
                 </form>
             </div>
+            {
+                error && (
+                    <div className="error">
+                        {error}
+                    </div>
+                )
+            }
         </div>
+
     );
 }
